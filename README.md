@@ -1,2 +1,2 @@
 # words-api
-Return randomized words based on part of speech.
+Comically simple way to return randomized words based on part of speech.
