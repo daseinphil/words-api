@@ -9,17 +9,21 @@ class MainHandler(tornado.web.RequestHandler):
  
 class NounHandler(MainHandler):
     def get(self):
-        noun_file = open('nouns.json', 'r')
-        noun_text = noun_file.read()
+        noun_text = open('nouns.json', 'r').read()
         noun_json = json.loads(noun_text)
         self.write(random.choice(noun_json))
 
 class VerbHandler(MainHandler):
     def get(self):
-        verb_file = open('verbs.json', 'r')
-        verb_text = verb_file.read()
+        verb_text = open('verbs.json', 'r').read()
         verb_json = json.loads(verb_text)
         self.write(random.choice(verb_json))
+
+class AdjectiveHandler(MainHandler):
+    def get(self):
+        adjective_text = open('adjectives.json', 'r').read()
+        adjective_json = json.loads(adjective_text)
+        self.write(random.choice(adjective_json))
 
 # RAMMING SPEEEEED
 def main():
@@ -27,6 +31,8 @@ def main():
         (r"/", MainHandler),
         (r"/noun", NounHandler),
         (r"/verb", VerbHandler),
+        (r"/adjective", AdjectiveHandler),
+
     ])
     http_server = tornado.httpserver.HTTPServer(application)
     port = int(os.environ.get("PORT", 5000))
